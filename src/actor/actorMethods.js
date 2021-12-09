@@ -29,3 +29,13 @@ exports.updateActor = async (key1, value1, key2, value2) => {
     console.log(error);
   }
 }
+
+exports.deleteActor = async (key, value) => {
+  try {
+    const actorObj = {};
+    actorObj[key] = value;
+    await Actor.destroy({ where: actorObj });
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -29,3 +29,13 @@ exports.updateSeries = async (key1, value1, key2, value2) => {
     console.log(error);
   }
 }
+
+exports.deleteSeries = async (key, value) => {
+  try {
+    const seriesObj = {};
+    seriesObj[key] = value;
+    await Series.destroy({ where: seriesObj });
+  } catch (error) {
+    console.log(error);
+  }
+}

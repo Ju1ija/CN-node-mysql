@@ -1,8 +1,8 @@
 require("./db/connection");
 const yargs = require("yargs");
-const { addMovie, listMovies, updateMovie } = require("./movie/movieMethods");
-const { addSeries, listSeries, updateSeries } = require("./series/seriesMethods");
-const { addActor, listActors, updateActor } = require("./actor/actorMethods");
+const { addMovie, listMovies, updateMovie, deleteMovie } = require("./movie/movieMethods");
+const { addSeries, listSeries, updateSeries, deleteSeries } = require("./series/seriesMethods");
+const { addActor, listActors, updateActor, deleteActor } = require("./actor/actorMethods");
 
 const app = async (args) => {
   switch (process.argv[2]) {
@@ -32,6 +32,15 @@ const app = async (args) => {
       break;
     case "update actor":
       updateActor(process.argv[3], process.argv[4], process.argv[5], process.argv[6]);
+      break;
+    case "delete movie":
+      deleteMovie(process.argv[3], process.argv[4]);
+      break;
+    case "delete series":
+      deleteSeries(process.argv[3], process.argv[4]);
+      break;
+    case "delete actor":
+      deleteActor(process.argv[3], process.argv[4]);
       break;
     default:
       console.log("Incorrect command");

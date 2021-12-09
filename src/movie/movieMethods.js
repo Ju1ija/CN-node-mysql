@@ -29,3 +29,13 @@ exports.updateMovie = async (key1, value1, key2, value2) => {
     console.log(error);
   }
 }
+
+exports.deleteMovie = async (key, value) => {
+  try {
+    const movieObj = {};
+    movieObj[key] = value;
+    await Movie.destroy({ where: movieObj });
+  } catch (error) {
+    console.log(error);
+  }
+}
