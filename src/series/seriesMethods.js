@@ -17,3 +17,15 @@ exports.listSeries = async () => {
     console.log(error);
   }
 }
+
+exports.updateSeries = async (key1, value1, key2, value2) => {
+  try {
+    const newVal = {};
+    const oldVal = {};
+    newVal[key1] = value1;
+    oldVal[key2] = value2;
+    await Series.update(newVal, { where: oldVal });
+  } catch (error) {
+    console.log(error);
+  }
+}
