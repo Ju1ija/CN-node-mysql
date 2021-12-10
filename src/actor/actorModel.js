@@ -2,28 +2,42 @@ const sequelize = require("../db/connection");
 const { DataTypes } = require("sequelize");
 const Movie = require("../movie/movieModel");
 const Series = require("../series/seriesModel");
+const User = require("../user/userModel");
 
 const Actor = sequelize.define("Actor", {
-  name: {
+  actorId: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  fullName: {
     type: DataTypes.STRING,
     allowNull: false
   },
   nationality: {
     type: DataTypes.STRING
   },
-  movie_id: {
+  movieId: {
     type: DataTypes.INTEGER,
     references: {
       model: Movie,
-      key: "id"
+      key: "movieId"
     }
   },
-  series_id: {
+  seriesId: {
     type: DataTypes.INTEGER,
     references: {
       model: Series,
-      key: "id"
+      key: "seriesId"
     }
+  },
+  addedBy: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: User,
+      key: "userId"
+    },
+    allowNull: false
   }
 }, {
   tableName: "Actors"

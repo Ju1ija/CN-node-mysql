@@ -1,7 +1,13 @@
 const sequelize = require("../db/connection");
 const { DataTypes } = require("sequelize");
+const User = require("../user/userModel");
 
 const Series = sequelize.define("Series", {
+  seriesId: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   title: {
     type: DataTypes.STRING,
     allowNull: false
@@ -9,13 +15,11 @@ const Series = sequelize.define("Series", {
   release: {
     type: DataTypes.INTEGER,
     min: 1888,
-    max: new Date().getFullYear(),
     allowNull: false
   },
-  last_episode: {
+  lastEpisode: {
     type: DataTypes.INTEGER,
-    min: 1888,
-    max: new Date().getFullYear(),
+    min: 1888
   },
   genre: {
     type: DataTypes.STRING
@@ -24,6 +28,14 @@ const Series = sequelize.define("Series", {
     type: DataTypes.DECIMAL(10, 1),
     min: 0,
     max: 10
+  },
+  addedBy: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: User,
+      key: "userId"
+    },
+    allowNull: false
   }
 }, {
   tableName: "TV Series"

@@ -4,7 +4,7 @@ exports.addMovie = async (movieObj) => {
   try {
     await Movie.sync();
     await Movie.create(movieObj);
-    console.log(`Successfully created ${movieObj.title} (${movieObj.release}).`);
+    console.log(`Successfully added ${movieObj.title} (${movieObj.release}).`);
   } catch (error) {
     console.log(error);
   }
@@ -12,7 +12,8 @@ exports.addMovie = async (movieObj) => {
 
 exports.listMovies = async () => {
   try {
-    console.log(await Movie.findAll({}));
+    const list = await Movie.findAll({});
+    console.log(list);
   } catch (error) {
     console.log(error);
   }
@@ -21,10 +22,11 @@ exports.listMovies = async () => {
 exports.updateMovie = async (key1, value1, key2, value2) => {
   try {
     const newVal = {};
-    const oldVal = {};
+    const condition = {};
     newVal[key1] = value1;
-    oldVal[key2] = value2;
-    await Movie.update(newVal, { where: oldVal });
+    condition[key2] = value2;
+    const updatedObj = await Movie.update(newVal, { where: condition });
+    console.log(`Successfully updated ${updatedObj} movie(s)/row(s).`);
   } catch (error) {
     console.log(error);
   }
@@ -32,9 +34,10 @@ exports.updateMovie = async (key1, value1, key2, value2) => {
 
 exports.deleteMovie = async (key, value) => {
   try {
-    const movieObj = {};
-    movieObj[key] = value;
-    await Movie.destroy({ where: movieObj });
+    const condition = {};
+    condition[key] = value;
+    const deletedObj = await Movie.destroy({ where: condition });
+    console.log(`Successfully deleted ${deletedObj} movie(s)/row(s).`);
   } catch (error) {
     console.log(error);
   }
