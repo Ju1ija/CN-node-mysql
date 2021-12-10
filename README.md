@@ -1,1 +1,1 @@
-# CN-node-mysql
+![Diagram](./src/diagram.png)
